@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link href="style/style.css" rel="stylesheet" type="text/css" media="all">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>COSC120</title>
+</head>
+
+<body>
+
+<!-- Sidebar start -->
+
+<nav>
+	<div>
+	<!-- Optional image in sidebar, will be resized if it's too big -->
+	<a href="index.html">Home</a>
+	<a href="ENST100.html">ENST100</a>
+	<a href="CHEM106.html">CHEM106</a>
+  <a href="COSC120.html">COSC120</a>
+  <a href="HIST394.html">HIST394</a>
+  <a href="ENGL201.html">ENGL201</a>
+	<!-- Up to 8 links fit comfortably on my small laptop screen with the image used in the preview;
+			Without an image, up to 14 links fit -->
+	</div>
+</nav>
+
+<div class="stripe"></div>
+
+<!-- Sidebar end -->
+
+<main>
+
+<div class="container"> <!-- Keeps sections from getting too stretched on ultrawide monitors -->
+
+<header>
+
+	<h1>COSC120: Introduction to Computer Science</h1>
+
+</header>
+
+<section> <!-- Sections are styled with borders, padding, margins, etc -->
+    
+    <h3> header </h3>
+
+    <p> This class provides an entry-level way of learning simple programming skills on a college level. It was an enjoyable experience, yet I took four years of programming in highschool including java so this was mostly supplementary as to meet academic requirements. </p>
+    <p> Unfortunately, I failed to preserve the raw java code from this class, but I do have pictures of my code preserved in homework assignments which I can reconstruct from there. The code block below is a simple guessing game. </p>
+
+  
+	<pre><code>
+
+    import java.util.Scanner;
+    import java.lang.Math;
+    public class Main{
+      public static void main(String[] args){
+         Scanner scan = new Scanner(System.in);  
+        System.out.println("Would you like to play? (y/n)... ");
+        if ((scan.next().charAt(0)) == 'n'){
+          System.out.println("Ending...");
+          System.exit(0);
+        }
+        System.out.println("Enter name (String)... "); 
+        String name = scan.next();
+        System.out.println("Enter id num (int)... ");
+        int idNum = scan.nextInt();
+        Player user = new Player(idNum, name);
+        // start the loop
+        Boolean looping = true;
+        while (looping == true){
+            System.out.println("your have " + user.token + " tokens & your balence is " + user.bal + ".");
+            System.out.println("Would you like to buy tokens? (y/n)... ");
+            if ((scan.next().charAt(0)) == 'y'){
+                System.out.println("how many tokens would you like to buy? (int)... ");
+                int tokenBuyQuantity = scan.nextInt();
+                user.buy(tokenBuyQuantity);
+                System.out.println(tokenBuyQuantity + " tokens bought..... ");
+            } 
+            System.out.println("Starting match.....");
+            System.out.println("Would you like to bet? (y/n)... ");
+            if ((scan.next().charAt(0)) == 'y'){
+                System.out.println("how much would you like to bet? (int)... ");
+                int betAmount = scan.nextInt();
+                ///remove betAmmount from account 
+                user.subtractToken(betAmount);
+                ///bet and roll
+                System.out.println("Enter a number to bet upon it (1-6)... ");
+                int betNum = scan.nextInt();
+                Dice die = new Dice(1,1);
+                ///if win add betAmmount * 6 to account 
+                if (die.roll(betNum)){
+                    user.addToken(betAmount*6);
+                    System.out.println("you win! :)");
+                } else { System.out.println("you lose! :("); }
+                System.out.println("Round ending....."); 
+                } else { System.out.println("round skiped....."); }
+            System.out.println("Would you like to continue playing? (y/n)... ");
+            if ((scan.next().charAt(0)) == 'n'){
+                looping = false;
+                //you left with x tokens and x ballence
+                System.out.println("you (" + name + ") left with " + user.getToken() + " tokens and " + user.getBal() + " bank balence.....");
+                System.out.println("Ending..... ");
+                System.exit(0);
+            }
+        }
+    }          
+}
+
+ </code></pre>
+
+ <p> The modern world is almost entirely dependent upon digital means and infrastructure, such that practically all climate solutions will leverage this in some way. To this end, computer science will be a nessary tool in the fight agaist climate change. This also builds on knollege with other lanuages commonly used in science such as R lang.</p>
+ <p>https://www.nature.com/articles/d41586-020-03382-2</p>
+ <p> Presently, I am continuing to develop my programming skills. On the side I am learning Rust (below is a small program in a similar vein to the java program above) and I’ve recently switched to using linux as my primary driver. To this end, I decided to write this website in HTML/CSS using a cool template found on Neocities and to host it on github rather than simply use google sites, to further develop these skills. </p>
+    
+<details><summery><pre><code>
+use std::cmp::Ordering;
+use std::io;
+
+use rand::Rng;
+
+fn main() {
+    println!("Guess the number!");
+
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+
+    println!("Please input your guess:");
+    
+    loop {
+        let mut guess = String::new();
+
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        println!("you guessed: {guess}");
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too large!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }   
+    }
+
+}      
+</code></pre></summery></details>
+
+
+</section>
+
+<section>
+1) nature article
+
+
+</section>
+
+<footer>
+
+	<p><a href="https://ribo.zone/free/layouts/">layout by ribo.zone</a></p>
+	<!-- I won't be mad if you delete this, haha --> <!-- Thanks ribby -->
+	
+</footer> 
+
+</div>
+
+</main>
+
+</body>
+</html>
